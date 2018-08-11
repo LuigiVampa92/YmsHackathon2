@@ -20,6 +20,28 @@ public class GameActivity extends Activity implements View.OnClickListener {
     private BackgorundLoop backgorundAnimator;
     private final int FPS = 50;
 
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+
+        switch (event.getAction()) {
+            case MotionEvent.ACTION_DOWN:
+                mGameView.mLeftPressed = true;
+                mGameView.mRightPressed = false;
+                return true;
+
+            case MotionEvent.ACTION_UP:
+                mGameView.mRightPressed = true;
+                mGameView.mLeftPressed = false;
+                return true;
+
+            case MotionEvent.ACTION_MOVE:
+
+                return true;
+        }
+        return true;
+    }
+
     protected void onCreate(Bundle savedInstance) {
         super.onCreate(savedInstance);
         setContentView(R.layout.activity_game);
@@ -38,11 +60,11 @@ public class GameActivity extends Activity implements View.OnClickListener {
 //        mPauseButton = (Button) findViewById(R.id.pauseButton);
 //        mPauseButton.setOnClickListener(this);
 //
-        mLeftButton = (Button) findViewById(R.id.leftButton);
+       /* mLeftButton = (Button) findViewById(R.id.leftButton);
         mLeftButton.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent event) {
-                switch(event.getAction()) {
+                switch (event.getAction()) {
                     case MotionEvent.ACTION_DOWN:
                         mGameView.mLeftPressed = true;
                         return true;
@@ -58,7 +80,7 @@ public class GameActivity extends Activity implements View.OnClickListener {
         mRightButton.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent event) {
-                switch(event.getAction()) {
+                switch (event.getAction()) {
                     case MotionEvent.ACTION_DOWN:
                         mGameView.mRightPressed = true;
                         return true;
@@ -69,7 +91,7 @@ public class GameActivity extends Activity implements View.OnClickListener {
                 return false;
             }
         });
-
+*/
 /*        mLeftButton = (Button) findViewById(R.id.leftButton);
         mLeftButton.setOnClickListener(new View.OnClickListener() {
             @Override

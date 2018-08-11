@@ -15,7 +15,7 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent" />
 
-    <Button
+    <!--<Button
         android:id="@+id/leftButton"
         android:layout_width="100dp"
         android:layout_height="50dp"
@@ -28,7 +28,7 @@
         android:layout_height="50dp"
         android:background="@android:drawable/arrow_up_float"
         android:layout_alignRight="@id/gameView"
-        android:layout_alignBottom="@+id/gameView"/>
+        android:layout_alignBottom="@+id/gameView"/>-->
 
     <Button
         android:id="@+id/pauseButton"
