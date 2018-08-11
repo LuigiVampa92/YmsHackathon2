@@ -2,6 +2,7 @@ package com.luigivampa92.hackathon2uncompressed;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 
 import java.util.ArrayList;
@@ -9,7 +10,7 @@ import java.util.ArrayList;
 public class Obstacle {
     private static final int SPEED = 5;
 
-    private Bitmap obstacle;
+//    private Bitmap obstacle;
     private int x;
     private int y;
     private int resetY;
@@ -22,7 +23,7 @@ public class Obstacle {
     public Obstacle(Bitmap bmp, int[] coordinates, boolean isDonut, int canvasHeight,
                     int size, ArrayList<Integer> possibleLanes) {
         collided = false;
-        obstacle = bmp;
+//        obstacle = bmp;
 
         this.x = coordinates[0];
         this.y = coordinates[1];
@@ -45,7 +46,7 @@ public class Obstacle {
             int rand = (int) (Math.random() * 3);
             this.x = this.lanes.get(rand);
         }
-        this.y -= 2 * SPEED;
+        this.y -= 2 * SPEED; // todo
     }
 
     public int getX() {
@@ -77,6 +78,6 @@ public class Obstacle {
     }
 
     public void draw(Canvas c, Paint p) {
-        c.drawBitmap(obstacle, x, y, p);
+        c.drawRect(x - size / 2, y - size / 2, x + size / 2, y + size / 2, p);
     }
 }

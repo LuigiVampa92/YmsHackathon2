@@ -57,7 +57,7 @@ public class GameView extends View {
         // Initializing Character
         Bitmap mCharacterBmp = BitmapFactory.decodeResource(getResources(), R.drawable.character1);
         mCharacterBmp = Bitmap.createScaledBitmap(mCharacterBmp, chaSize, chaSize, false);
-        mCharacter = new PlayerCharacter(mCharacterBmp, getWidth() / 2 - chaSize / 2, chaSize);
+        mCharacter = new PlayerCharacter(getWidth() / 2 - chaSize / 2, chaSize);
 
         // Initializing Obstacles
         mObstacles = new ArrayList<Obstacle>();
@@ -120,7 +120,7 @@ public class GameView extends View {
     }
 
     // Grab x and y coordinates for an Obstacle
-    private int[] getCoordinates(boolean isDonut) {
+    private int[] getCoordinates(boolean isDonut) { // todo
         int[] coordinates = new int[2];
         int x = lanes.get((int)(Math.random() * NUM_LANES));
 
@@ -134,6 +134,8 @@ public class GameView extends View {
         coordinates[1] = y;
 
         // Return coordinates for the new obstacle
+
+        Log.d("YMSH_DEBUG", String.format("[ x = %d , y = %d ]", x, y));
         return coordinates;
     }
 
@@ -161,8 +163,8 @@ public class GameView extends View {
     }
 
     private void gameOver() {
-        mGameLoop.gameOver = true;
-        mGameLoop.stop();
+//        mGameLoop.gameOver = true;
+//        mGameLoop.stop();
         // TODO save to high scores list
     }
 
@@ -223,6 +225,7 @@ public class GameView extends View {
 //        canvas.drawLine(getWidth() / 3 * 2, 0, getWidth() / 3 * 2, getHeight(), paint);
 
         // Draw character
-        mCharacter.draw(canvas, paint);
+//        mCharacter.draw(canvas, paint);
+        mCharacter.draw(canvas);
     }
 }
