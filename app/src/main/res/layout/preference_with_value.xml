@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginLeft="8dip"
+    android:layout_marginRight="8dip"
+    android:layout_marginTop="8dip"
+    android:layout_marginBottom="8dip">
+
+    <LinearLayout
+        android:id="@+id/preference_first_line"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:layout_marginTop="8dip">
+
+        <TextView
+            android:text="title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:ellipsize="marquee"
+            android:fadingEdge="horizontal"
+            android:layout_marginRight="15dip"
+            android:textSize="18sp"
+            android:layout_marginLeft="8dip"
+            android:id="@+android:id/title" />
+
+        <TextView
+            android:text="value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="10"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:gravity="right"
+            android:ellipsize="end"
+            android:id="@+id/preference_value" />
+
+    </LinearLayout>
+
+    <TextView
+        android:text="summary"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginBottom="8dip"/>
+
+</LinearLayout>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Hackathon2Uncompressed</string>
+    <string name="game_modes">Режим игры</string>
+    <string name="normal">Обычный</string>
+    <string name="hard">Сложный</string>
+    <string name="gameSpeedText">Установите скорость движения</string>
+</resources>
