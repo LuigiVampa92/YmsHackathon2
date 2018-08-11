@@ -10,8 +10,18 @@ import android.view.View;
 
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Arrays;
+
 public class TerrainView extends View
 {
+
+	double[] background1;
+	double[] background2;
+	double[] background3;
+	int background1fps = 0;
+	int background2fps = 0;
+	int background3fps = 0;
+
 	public TerrainView(Context context)
 	{
 		super(context);
@@ -36,12 +46,12 @@ public class TerrainView extends View
 	protected void onDraw(Canvas canvas) {
 		super.onDraw(canvas);
 
-		drawTerrain(canvas, 0xff7C07A9, 10.0, 1.0 , 1300, 100);
-		drawTerrain(canvas, 0xff65247F, 10.0, 1.2 , 700, 100);
-		drawTerrain(canvas, 0xff50026E, 10.0, 1.1777 , 300, 100);
+		background1 = drawTerrain(background1, canvas, 0x007C07A9, 10.0, 1.0, 1300, 150);
+		background2 = drawTerrain(background2, canvas, 0x0065247F, 10.0, 1.1777, 600, 50);
+		background3 = drawTerrain(background3, canvas, 0x0050026E, 10.0, 1.1777, 300, 10);
 	}
 
-	private void drawTerrain(Canvas canvas, int color, double displace, double roughness, int h, int period) {
+	private double[] drawTerrain(double[] list1, Canvas canvas, int color, double displace, double roughness, int h, int period) {
 		DisplayMetrics displayMetrics = new DisplayMetrics();
 		getDisplay().getMetrics(displayMetrics);
 
@@ -51,8 +61,14 @@ public class TerrainView extends View
 		blockPaint.setStyle(Paint.Style.FILL);
 		blockPaint.setAntiAlias(true);
 
-		double[] list = terrain(new Double(displayMetrics.widthPixels) + 1000, new Double(displayMetrics.heightPixels) - h, displace, roughness);
-
+		double[] list;
+		if(list1 != null)
+		{
+			 list = list1;
+		}else
+		{
+				list = terrain(new Double(displayMetrics.widthPixels) + 2000, new Double(displayMetrics.heightPixels) - h, displace, roughness);
+		}
 		Path fillPath = new Path();
 		fillPath.moveTo(0, 0);
 		fillPath.lineTo(displayMetrics.widthPixels, 0);
@@ -60,10 +76,21 @@ public class TerrainView extends View
 		for (int i = 0; i < list.length - period; i += period) {
 			fillPath.lineTo((float) list[i], i); // Final point
 		}
-		fillPath.lineTo(0, displayMetrics.heightPixels); // First point
+		fillPath.lineTo(0, list.length - 1); // First point
 		fillPath.lineTo(0, 0); // Same origin point
 		canvas.drawPath(fillPath, blockPaint);
 		blockPaint.setStyle(Paint.Style.FILL);
+
+
+		try
+		{
+			if(list.length - period > displayMetrics.heightPixels + 100)
+				return Arrays.copyOfRange(list, period, list.length);
+			else
+				return null;
+		}catch(IllegalArgumentException e) {
+			return null;
+		}
 	}
 
 	private double[] terrain(Double width, Double height, Double displace, Double roughness) {
