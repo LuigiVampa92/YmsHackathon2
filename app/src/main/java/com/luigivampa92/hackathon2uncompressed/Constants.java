@@ -12,4 +12,6 @@ public class Constants {
             Color.argb(100, 50, 200, 100)                               //green
     };
 
+    public static int speed = 5;
+    public static int aircraftColor = Color.argb(100, 200, 50, 100);
 }

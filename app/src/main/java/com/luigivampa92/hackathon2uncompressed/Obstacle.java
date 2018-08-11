@@ -6,7 +6,6 @@ import android.graphics.Paint;
 import java.util.ArrayList;
 
 public class Obstacle {
-    private static final int SPEED = 5;
 
     private int x;
     private int y;
@@ -20,6 +19,8 @@ public class Obstacle {
     private Paint paintCoin;
     private Paint paintCoinSide;
     private Paint paintCoinText;
+    private Paint paintStone;
+    private Paint paintStoneDirt;
 
     public Obstacle(int[] coordinates, boolean isDonut, int canvasHeight,
                     int size, ArrayList<Integer> possibleLanes) {
@@ -53,6 +54,14 @@ public class Obstacle {
         paintCoinText.setColor(0xffaa9f10);
         paintCoinText.setTextSize(size / 2);
         paintCoinText.setStrokeWidth(12);
+
+        paintStone = new Paint(Paint.ANTI_ALIAS_FLAG);
+        paintStone.setColor(0xff555555);
+        paintStone.setStrokeWidth(12);
+
+        paintStoneDirt = new Paint(Paint.ANTI_ALIAS_FLAG);
+        paintStoneDirt.setColor(0xcc222222);
+        paintStoneDirt.setStrokeWidth(12);
     }
 
     public void update() {
@@ -63,7 +72,7 @@ public class Obstacle {
             int rand = (int) (Math.random() * 3);
             this.x = this.lanes.get(rand);
         }
-        this.y -= 2 * SPEED; // todo
+        this.y -= 2 * Constants.speed; // todo
     }
 
     public int getX() {
@@ -99,7 +108,7 @@ public class Obstacle {
             drawCoin(c);
         }
         else {
-            drawCoin(c);
+            drawAsteroid(c);
         }
     }
 
@@ -115,4 +124,13 @@ public class Obstacle {
                 paintCoinText
         );
     }
+
+    private void drawAsteroid(Canvas c) {
+        c.drawOval(x - size / 2, y - size / 2, x + size / 2, y + size / 2, paintStone);
+        c.drawOval(x - size / 4, y - size / 4, x + size / 2 - size / 8, y + size / 2 - size / 4, paintStoneDirt);
+    }
 }
+
+
+// луна если что =)
+//         c.drawOval(x - size / 4, y - size / 4, x + size / 2, y + size / 2, paintStoneDirt);

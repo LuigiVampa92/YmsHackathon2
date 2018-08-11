@@ -14,7 +14,7 @@ import android.widget.ImageButton;
 
 public class MainActivity extends Activity {
 
-    SharedPreferences sharedPreferences;
+    //SharedPreferences sharedPreferences;
     String currentLayout;
     Button normalGameBtn, hardGameBtn;
     ImageButton settingsBtn;
@@ -32,14 +32,14 @@ public class MainActivity extends Activity {
         Constants.SCREEN_WIDTH = dm.widthPixels;
         Constants.SCREEN_HEIGHT = dm.heightPixels;
 
-        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        //sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         if (currentLayout == null) {
-            launchSplashScreen();
+            launchScreen();
         }
 
     }
 
-    public void launchSplashScreen() {
+    public void launchScreen() {
         currentLayout = "splashScreen";
         setContentView(R.layout.activity_main);
 
@@ -55,7 +55,7 @@ public class MainActivity extends Activity {
         hardGameBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //launchHardGame();
+                launchHardGame();
             }
         });
 
@@ -70,12 +70,17 @@ public class MainActivity extends Activity {
 
     public void launchNormalGame() {
         currentLayout = "normalGame";
-        startActivity(new Intent(MainActivity.this, GameActivity.class));
-        //setContentView();
+        start();
     }
 
     public void launchHardGame() {
         currentLayout = "hardGame";
+        start();
+    }
+
+    private void start() {
+        Intent normal = new Intent(MainActivity.this, GameActivity.class);
+        startActivity(normal.putExtra(GameActivity.LVL, currentLayout));
     }
 
     public void launchSettings() {

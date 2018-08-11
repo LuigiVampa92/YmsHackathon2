@@ -3,34 +3,62 @@
 
     <string-array name="normal_speed">
         <item>1</item>
-        <item>2</item>
-        <item>3</item>
-        <item>4</item>
         <item>5</item>
+        <item>10</item>
+        <item>15</item>
+        <item>20</item>
     </string-array>
 
     <string-array name="normal_speed_num_values">
         <item>1</item>
-        <item>2</item>
-        <item>3</item>
-        <item>4</item>
         <item>5</item>
+        <item>10</item>
+        <item>15</item>
+        <item>20</item>
+    </string-array>
+
+    <string-array name="normal_color">
+        <item>red</item>
+        <item>green</item>
+        <item>blue</item>
+        <item>orange</item>
+    </string-array>
+
+    <string-array name="normal_color_num_values">
+        <item>red</item>
+        <item>green</item>
+        <item>blue</item>
+        <item>orange</item>
     </string-array>
 
     <string-array name="hard_speed">
-        <item>6</item>
-        <item>7</item>
-        <item>8</item>
-        <item>9</item>
-        <item>10</item>
+        <item>25</item>
+        <item>30</item>
+        <item>40</item>
+        <item>45</item>
+        <item>50</item>
+    </string-array>
+
+    <string-array name="hard_color">
+        <item>red</item>
+        <item>green</item>
+        <item>blue</item>
+        <item>orange</item>
     </string-array>
 
     <string-array name="hard_speed_num_values">
-        <item>1</item>
-        <item>2</item>
-        <item>3</item>
-        <item>4</item>
-        <item>5</item>
+        <item>25</item>
+        <item>30</item>
+        <item>40</item>
+        <item>45</item>
+        <item>50</item>
+    </string-array>
+
+    <string-array name="hard_color_num_values">
+        <item>red</item>
+        <item>green</item>
+        <item>blue</item>
+        <item>orange</item>
     </string-array>
 
 </resources>

@@ -17,7 +17,8 @@ public class PlayerCharacter {
         this.size = size;
 
         paint = new Paint(Paint.ANTI_ALIAS_FLAG);
-        paint.setColor(Color.RED);
+
+        paint.setColor(Constants.aircraftColor);
         paint.setStrokeWidth(12);
     }
 

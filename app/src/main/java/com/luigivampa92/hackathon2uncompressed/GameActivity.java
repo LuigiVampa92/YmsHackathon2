@@ -1,8 +1,10 @@
 package com.luigivampa92.hackathon2uncompressed;
 
 import android.app.Activity;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
@@ -10,6 +12,9 @@ import android.widget.Button;
 
 public class GameActivity extends Activity implements View.OnClickListener {
 
+    public static final String LVL = "lvl";
+    String lvlName = null;
+    SharedPreferences sharedPreferences;
     private GameView mGameView;
     private TerrainView backgroundView;
     private boolean mPaused;
@@ -44,7 +49,8 @@ private Button newGame;
     protected void onCreate(Bundle savedInstance) {
         super.onCreate(savedInstance);
         setContentView(R.layout.activity_game);
-
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        lvlName = getIntent().getStringExtra(GameActivity.LVL);
         mGameView = (GameView) findViewById(R.id.gameView);
 
 
@@ -53,7 +59,6 @@ private Button newGame;
         backgroundView = findViewById(R.id.background);
         animator = new GameLoop(mGameView, FPS, newGame);
         backgorundAnimator = new BackgorundLoop(backgroundView, 20);
-        Log.d("GameView", "gv object: " + mGameView);
 
 //        mGameView.mLivesTextView = (TextView) findViewById(R.id.livesLabel);
 //        mGameView.mScoreTextView = (TextView) findViewById(R.id.scoreLabel);
@@ -131,6 +136,7 @@ private Button newGame;
 
     public void onResume() {
         super.onResume();
+        loadPreferences();
         if (!animator.isRunning()) {
             animator.start();
         }
@@ -175,6 +181,33 @@ private Button newGame;
         if (backgorundAnimator.isRunning()) {
             backgorundAnimator.stop();
         }
+    }
+
+    public void loadPreferences() {
+        if (lvlName.equals("normalGame")) {
+            Constants.speed = Integer.parseInt(sharedPreferences.getString("normalSpeed", "5"));
+            String s = sharedPreferences.getString("normalColor", "");
+            Constants.aircraftColor = getColor(s);
+        }
+        if (lvlName.equals("hardGame")) {
+            Constants.speed = Integer.parseInt(sharedPreferences.getString("hardSpeed", "30"));
+            String s = sharedPreferences.getString("hardColor", "");
+            Constants.aircraftColor = getColor(s);
+        }
+    }
+
+    private int getColor(String s) {
+        switch(s) {
+            case "red":
+                return Color.argb(252, 200, 50, 100);
+            case "blue":
+                return Color.argb(252, 50, 100, 200);
+            case "orange":
+                return Color.argb(252, 200, 100, 50);
+            case "green":
+                return Color.argb(252, 50, 200, 100);
+        }
+        return Color.argb(252, 200, 50, 100);
     }
 }
 
