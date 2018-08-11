@@ -188,6 +188,9 @@ public class GameView extends View {
     private void gameOver() {
        mGameLoop.gameOver = true;
        mGameLoop.stop();
+
+
+
         // TODO save to high scores list
     }
 
@@ -223,6 +226,9 @@ public class GameView extends View {
         showText("Lives: " + mLives, 50, 50, 100);
 
 
+        if(mLives == 0){
+            showText("Game Over", 50, canvas.getWidth()/2-60, canvas.getHeight()/2);
+        }
         // Move character
         if (mLeftPressed && !(mCharacter.getX() < 1)) {
 //            Log.d(TAG, "insde mLeft X-COOR " + mCharacter.getX());

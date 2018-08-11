@@ -2,6 +2,8 @@ package com.luigivampa92.hackathon2uncompressed;
 
 import android.os.Handler;
 import android.os.Looper;
+import android.view.View;
+import android.widget.Button;
 
 public class GameLoop {
 
@@ -12,20 +14,21 @@ public class GameLoop {
     private Thread thread = null;
     private Handler handler = null;
     private volatile boolean running = false;
-
+private Button btn;
 
     /**
      * Constructs a new drawing thread to update the given view
      * the given number of times per second.
      * Does NOT start the thread running; call start() to do so.
      */
-    public GameLoop(GameView view, int fps) {
+    public GameLoop(GameView view, int fps, Button btn) {
         if (view == null || fps <= 0) {
             throw new IllegalArgumentException();
         }
         this.mView = view;
         this.fps = fps;
         this.handler = new Handler(Looper.getMainLooper());
+        this.btn = btn;
     }
 
     /**
@@ -58,6 +61,9 @@ public class GameLoop {
             }
             thread = null;
         }
+
+        btn.setVisibility(View.VISIBLE);
+
     }
 
     /*

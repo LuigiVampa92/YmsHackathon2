@@ -19,7 +19,7 @@ public class GameActivity extends Activity implements View.OnClickListener {
     private BackgorundLoop backgorundAnimator;
     private final int FPS = 50;
 
-
+private Button newGame;
     @Override
     public boolean onTouchEvent(MotionEvent event) {
 
@@ -46,15 +46,27 @@ public class GameActivity extends Activity implements View.OnClickListener {
         setContentView(R.layout.activity_game);
 
         mGameView = (GameView) findViewById(R.id.gameView);
+
+
+       newGame = findViewById(R.id.new_game_btn);
         mGameView.setBackgroundColor(Color.TRANSPARENT);
         backgroundView = findViewById(R.id.background);
-        animator = new GameLoop(mGameView, FPS);
+        animator = new GameLoop(mGameView, FPS, newGame);
         backgorundAnimator = new BackgorundLoop(backgroundView, 20);
         Log.d("GameView", "gv object: " + mGameView);
 
 //        mGameView.mLivesTextView = (TextView) findViewById(R.id.livesLabel);
 //        mGameView.mScoreTextView = (TextView) findViewById(R.id.scoreLabel);
         mGameView.mGameLoop = animator;
+
+
+        newGame.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                newGame.setVisibility(View.INVISIBLE);
+                animator.start();
+            }
+        });
 
 //        mPauseButton = (Button) findViewById(R.id.pauseButton);
 //        mPauseButton.setOnClickListener(this);
