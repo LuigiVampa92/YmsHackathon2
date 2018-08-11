@@ -1,20 +1,17 @@
 package com.luigivampa92.hackathon2uncompressed;
 
-import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 
 public class PlayerCharacter {
 
-//    private Bitmap character;
     private int x;
     private int y;
     private int size;
     private Paint paint;
 
     public PlayerCharacter(int x, int size) {
-//        character = bmp;
         this.x = x;
         this.size = size;
 
@@ -29,7 +26,7 @@ public class PlayerCharacter {
 
     public void draw(Canvas c) {
 //        c.drawBitmap(character, x, c.getHeight() - size, p);
-        c.drawOval(x - size /2, y - size / 2, x + size / 2, y + size /2, paint);
+        c.drawOval(x, y - size / 2, x + size, y + size /2, paint);
     }
 
     public int getWidth() {
