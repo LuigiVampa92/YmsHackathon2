@@ -30,13 +30,6 @@
         android:layout_alignRight="@id/gameView"
         android:layout_alignBottom="@+id/gameView"/>-->
 
-    <Button
-        android:id="@+id/pauseButton"
-        android:layout_width="15dp"
-        android:layout_height="15dp"
-        android:layout_alignRight="@id/gameView"
-        android:layout_alignTop="@+id/gameView"/>
-
     <TextView
         android:id="@+id/livesLabel"
         android:layout_width="wrap_content"

@@ -10,6 +10,7 @@ import android.media.AudioTrack;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.concurrent.ExecutorService;
@@ -21,6 +22,8 @@ public class GameView extends View {
     private int mScore;
     private int mLives;
 
+    private Canvas canvas;
+
     private PlayerCharacter mCharacter;
     private ArrayList<Obstacle> mObstacles;
     private int chaSize;
@@ -30,8 +33,8 @@ public class GameView extends View {
     public boolean mLeftPressed;
     public boolean mRightPressed;
 
-//    public TextView mLivesTextView;
-//    public TextView mScoreTextView;
+    public TextView mLivesTextView;
+    //    public TextView mScoreTextView;
     public GameLoop mGameLoop;
 
     private ExecutorService soundExecutor = Executors.newSingleThreadExecutor();
@@ -55,8 +58,8 @@ public class GameView extends View {
         // Initialize ArrayList of possible Obstacle positions at each lane
         int incr = getWidth() / 6;
         lanes = new ArrayList<Integer>();
-        for(int i = 0; i < NUM_LANES; i++){
-            lanes.add((int)((incr + (incr * i * 2)) - obsSize/2));
+        for (int i = 0; i < NUM_LANES; i++) {
+            lanes.add((int) ((incr + (incr * i * 2)) - obsSize / 2));
         }
 
         // Initializing Character
@@ -95,11 +98,13 @@ public class GameView extends View {
 
         if ((chaLeft < obsLeft && chaRight > obsRight) || (chaLeft >= obsLeft && chaLeft < obsRight)
                 || (chaRight <= obsRight && chaRight > obsLeft)) {
-            if (cha.getHeight()  >= obs.getY()) {
+            if (cha.getHeight() >= obs.getY()) {
                 obs.setCollided(true);
                 if (!obs.isDonut()) {
                     mLives--;
-//                    mLivesTextView.setText(String.valueOf("Lives:" + mLives));
+
+                   //showScore(String.valueOf(mLives),26);
+                    //mLivesTextView.setText(String.valueOf("Lives:" + mLives));
                     soundExecutor.execute(new Runnable() {
                         @Override
                         public void run() {
@@ -107,8 +112,9 @@ public class GameView extends View {
                         }
                     });
                 }
-                if(obs.isDonut()) {
+                if (obs.isDonut()) {
                     mScore++;
+                   // showScore(String.valueOf(mScore),26);
                     soundExecutor.execute(new Runnable() {
                         @Override
                         public void run() {
@@ -129,7 +135,7 @@ public class GameView extends View {
         int otherTop = other.getY();
         int otherBottom = otherTop + other.getHeight();
 
-        if((bottom >= otherTop && bottom < otherBottom) || (top >= otherTop && top < otherBottom)
+        if ((bottom >= otherTop && bottom < otherBottom) || (top >= otherTop && top < otherBottom)
                 || (top < otherTop && bottom > otherBottom)) {
             return true;
         }
@@ -139,12 +145,12 @@ public class GameView extends View {
     // Grab x and y coordinates for an Obstacle
     private int[] getCoordinates(boolean isDonut) { // todo
         int[] coordinates = new int[2];
-        int x = lanes.get((int)(Math.random() * NUM_LANES));
+        int x = lanes.get((int) (Math.random() * NUM_LANES));
 
         // Randomly get a y-location for the obstacles
         int offset = chaSize + obsSize;
         int range = getHeight();
-        int y = (int)(Math.random() * range) - offset;
+        int y = (int) (Math.random() * range) - offset;
         y = checkSafe(0, mObstacles.size(), x, y, range, offset, isDonut);
 
         coordinates[0] = x;
@@ -171,8 +177,8 @@ public class GameView extends View {
             }
 
             // Check that 2 broccoli obstacles are not directly besides each other
-            if (!isDonut && !otherIsDonut && (((int)Math.abs(x - otherX)) == (lanes.get(1) - lanes.get(0)))) {
-                tempY = checkSafe(0, i, x, (int)(Math.random() * range) - offset, range, offset, isDonut);
+            if (!isDonut && !otherIsDonut && (((int) Math.abs(x - otherX)) == (lanes.get(1) - lanes.get(0)))) {
+                tempY = checkSafe(0, i, x, (int) (Math.random() * range) - offset, range, offset, isDonut);
             }
         }
 
@@ -180,8 +186,8 @@ public class GameView extends View {
     }
 
     private void gameOver() {
-//        mGameLoop.gameOver = true;
-//        mGameLoop.stop();
+       mGameLoop.gameOver = true;
+       mGameLoop.stop();
         // TODO save to high scores list
     }
 
@@ -189,7 +195,34 @@ public class GameView extends View {
         mCharacter.update(distance);
     }
 
+
+    public void showText(String text, int fontSize, int x, int y) {
+
+        Paint fontPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        fontPaint.setTextSize(fontSize);
+        fontPaint.setStyle(Paint.Style.STROKE);
+        fontPaint.setColor(Color.WHITE);
+
+
+        // ширина текста
+        float width = fontPaint.measureText(text);
+
+        // посимвольная ширина
+        float[] widths = new float[text.length()];
+        fontPaint.getTextWidths(text, widths);
+
+        // вывод текста
+        canvas.drawText(text, x, y, fontPaint);
+    }
+
+
     public void onDraw(Canvas canvas) {
+        this.canvas = canvas;
+
+        showText("Score: " + mScore, 50, 50, 50);
+        showText("Lives: " + mLives, 50, 50, 100);
+
+
         // Move character
         if (mLeftPressed && !(mCharacter.getX() < 1)) {
 //            Log.d(TAG, "insde mLeft X-COOR " + mCharacter.getX());
@@ -204,7 +237,7 @@ public class GameView extends View {
 //        mScoreTextView.setText(String.valueOf("Score: " + mScore));
         if (mFirstDraw) {
             initialize();
-//            mLivesTextView.setText(String.valueOf("Lives:" + mLives));
+//           mLivesTextView.setText(String.valueOf("Lives:" + mLives));
 //            mScoreTextView.setText(String.valueOf("Score: " + mScore));
             mFirstDraw = false;
         }
@@ -260,8 +293,8 @@ public class GameView extends View {
         double[] mSound = new double[4410];
         short[] mBuffer = new short[duration];
         for (int i = 0; i < mSound.length; i++) {
-            mSound[i] = Math.sin((2.0*Math.PI * i/(44100/frequency)));
-            mBuffer[i] = (short) (mSound[i]*Short.MAX_VALUE);
+            mSound[i] = Math.sin((2.0 * Math.PI * i / (44100 / frequency)));
+            mBuffer[i] = (short) (mSound[i] * Short.MAX_VALUE);
         }
 
         mAudioTrack.setStereoVolume(AudioTrack.getMaxVolume(), AudioTrack.getMaxVolume());
