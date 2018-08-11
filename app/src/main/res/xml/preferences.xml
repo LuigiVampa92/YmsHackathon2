@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory android:title="Normal Game">
+
+        <com.luigivampa92.hackathon2uncompressed.ListPreferenceWithValue
+            android:defaultValue="5"
+            android:title="Speed"
+            android:entries="@array/normal_speed"
+            android:entryValues="@array/normal_speed_num_values"
+            android:key="normalSpeed"
+            android:summary="@string/gameSpeedText" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="Hard Game">
+
+
+        <com.luigivampa92.hackathon2uncompressed.ListPreferenceWithValue
+            android:defaultValue="8"
+            android:title="Speed"
+            android:entries="@array/hard_speed"
+            android:entryValues="@array/normal_speed_num_values"
+            android:key="hardSpeed"
+            android:summary="Set number minimal number of target dot for win condition." />
+    </PreferenceCategory>
+
+</PreferenceScreen>
