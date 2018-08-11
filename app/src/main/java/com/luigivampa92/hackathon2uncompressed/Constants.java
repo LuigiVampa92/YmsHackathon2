@@ -12,4 +12,6 @@ public class Constants {
             Color.argb(100, 50, 200, 100)                               //green
     };
 
+    public static int normalSpeed;
+    public static int hardSpeed;
 }

@@ -34,12 +34,12 @@ public class MainActivity extends Activity {
 
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         if (currentLayout == null) {
-            launchSplashScreen();
+            launchScreen();
         }
 
     }
 
-    public void launchSplashScreen() {
+    public void launchScreen() {
         currentLayout = "splashScreen";
         setContentView(R.layout.activity_main);
 
@@ -55,7 +55,7 @@ public class MainActivity extends Activity {
         hardGameBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //launchHardGame();
+                launchHardGame();
             }
         });
 
