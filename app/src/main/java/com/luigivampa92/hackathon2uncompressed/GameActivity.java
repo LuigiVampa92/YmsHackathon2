@@ -15,8 +15,7 @@ public class GameActivity extends Activity implements View.OnClickListener {
     private boolean mPaused;
     private Button mLeftButton;
     private Button mRightButton;
-    private Button mPauseButton;
-    private GameLoop animator;
+`    private GameLoop animator;
     private BackgorundLoop backgorundAnimator;
     private final int FPS = 50;
 

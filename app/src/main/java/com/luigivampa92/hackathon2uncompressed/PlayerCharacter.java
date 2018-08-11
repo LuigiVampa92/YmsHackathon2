@@ -26,31 +26,38 @@ public class PlayerCharacter {
     }
 
     public void draw(Canvas c) {
-//        c.drawBitmap(character, x, c.getHeight() - size, p);
-//        c.drawOval(x, y - size / 2, x + size, y + size /2, paint);
-
+        int tailGap = size / 10;
+        int winglength = size / 2;
+        int wingSide = size / 4;
+        int wingPeak = size / 20;
+        int bodySize = size / 10;
+        int bodyLen = size - size / 4;
 
         Path path = new Path();
-        path.moveTo(x + size / 2, y);
+        path.moveTo(x + size / 2, y + tailGap);
+
         path.lineTo(x + size, y);
+        path.lineTo(x + size, y + winglength);
+        path.lineTo(x + size - wingPeak, y + winglength + wingPeak);
+        path.lineTo(x + size - wingPeak * 2, y + winglength);
+        path.lineTo(x + size - wingPeak * 2, y + wingSide);
+        path.lineTo(x + size / 2 + bodySize, y + wingSide + tailGap);
+
+        path.lineTo(x + size / 2 + bodySize, y + bodyLen);
         path.lineTo(x + size / 2, y + size);
-        path.lineTo(x, y);
-        path.lineTo(x, y);
+        path.lineTo(x + size / 2 - bodySize, y + bodyLen);
+
+        path.lineTo(x + size / 2 - bodySize, y + wingSide + tailGap);
+        path.lineTo(x + wingPeak * 2, y + wingSide);
+        path.lineTo(x + wingPeak * 2, y + winglength);
+        path.lineTo(x + wingPeak, y + winglength + wingPeak);
+        path.lineTo(x, y + winglength);
+
+        path.lineTo(x , y);
+
+        path.lineTo(x + size / 2, y + tailGap); // back to start
+
         c.drawPath(path, paint);
-
-//        int gap = 10;
-//
-//        Path path = new Path();
-//        path.moveTo(x + gap + 5, y + size / 2);
-//
-//        path.rLineTo(size / 2, -5); // tail r
-//        path.rLineTo(-(size / 2), 5); // tail r
-//
-//        path.rLineTo(-(size / 2), -5);
-//        path.rLineTo(size / 2, 5);
-//
-//        c.drawPath(path, paint);
-
     }
 
     public int getWidth() {
