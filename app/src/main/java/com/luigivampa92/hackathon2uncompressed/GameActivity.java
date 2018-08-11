@@ -187,15 +187,15 @@ public class GameActivity extends Activity implements View.OnClickListener {
     private int getColor(String s) {
         switch(s) {
             case "red":
-                return Color.argb(128, 200, 50, 100);
+                return Color.argb(252, 200, 50, 100);
             case "blue":
-                return Color.argb(128, 50, 100, 200);
+                return Color.argb(252, 50, 100, 200);
             case "orange":
-                return Color.argb(128, 200, 100, 50);
+                return Color.argb(252, 200, 100, 50);
             case "green":
-                return Color.argb(128, 50, 200, 100);
+                return Color.argb(252, 50, 200, 100);
         }
-        return Color.argb(128, 200, 50, 100);
+        return Color.argb(252, 200, 50, 100);
     }
 }
 
