@@ -11,11 +11,13 @@ import android.widget.Button;
 public class GameActivity extends Activity implements View.OnClickListener {
 
     private GameView mGameView;
+    private TerrainView backgroundView;
     private boolean mPaused;
     private Button mLeftButton;
     private Button mRightButton;
     private Button mPauseButton;
     private GameLoop animator;
+    private BackgorundLoop backgorundAnimator;
     private final int FPS = 50;
 
     protected void onCreate(Bundle savedInstance) {
@@ -24,7 +26,9 @@ public class GameActivity extends Activity implements View.OnClickListener {
 
         mGameView = (GameView) findViewById(R.id.gameView);
         mGameView.setBackgroundColor(Color.TRANSPARENT);
+        backgroundView = findViewById(R.id.background);
         animator = new GameLoop(mGameView, FPS);
+        backgorundAnimator = new BackgorundLoop(backgroundView, FPS);
         Log.d("GameView", "gv object: " + mGameView);
 
 //        mGameView.mLivesTextView = (TextView) findViewById(R.id.livesLabel);
@@ -97,6 +101,9 @@ public class GameActivity extends Activity implements View.OnClickListener {
         if (!animator.isRunning()) {
             animator.start();
         }
+        if (!backgorundAnimator.isRunning()) {
+            backgorundAnimator.start();
+        }
     }
 
     @Override
@@ -122,12 +129,18 @@ public class GameActivity extends Activity implements View.OnClickListener {
         if (animator.isRunning()) {
             animator.stop();
         }
+        if (backgorundAnimator.isRunning()) {
+            backgorundAnimator.stop();
+        }
     }
 
     public void onStop() {
         super.onStop();
         if (animator.isRunning()) {
             animator.stop();
+        }
+        if (backgorundAnimator.isRunning()) {
+            backgorundAnimator.stop();
         }
     }
 }
