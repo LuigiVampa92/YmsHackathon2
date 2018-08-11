@@ -1,19 +1,22 @@
 package com.luigivampa92.hackathon2uncompressed;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.media.AudioFormat;
+import android.media.AudioManager;
+import android.media.AudioTrack;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
-import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class GameView extends View {
+
     private static final String TAG = "GameView";
     private int mScore;
     private int mLives;
@@ -30,6 +33,8 @@ public class GameView extends View {
 //    public TextView mLivesTextView;
 //    public TextView mScoreTextView;
     public GameLoop mGameLoop;
+
+    private ExecutorService soundExecutor = Executors.newSingleThreadExecutor();
 
     private static final int LINE_SIZE = 12;
     private static final int NUM_LANES = 3;
@@ -95,9 +100,21 @@ public class GameView extends View {
                 if (!obs.isDonut()) {
                     mLives--;
 //                    mLivesTextView.setText(String.valueOf("Lives:" + mLives));
+                    soundExecutor.execute(new Runnable() {
+                        @Override
+                        public void run() {
+                            playSound(2000, 44100);
+                        }
+                    });
                 }
                 if(obs.isDonut()) {
                     mScore++;
+                    soundExecutor.execute(new Runnable() {
+                        @Override
+                        public void run() {
+                            playSound(400, 44100);
+                        }
+                    });
                 }
                 return true;
             }
@@ -227,5 +244,32 @@ public class GameView extends View {
         // Draw character
 //        mCharacter.draw(canvas, paint);
         mCharacter.draw(canvas);
+    }
+
+    private void playSound(double frequency, int duration) {
+        // AudioTrack definition
+        int mBufferSize = AudioTrack.getMinBufferSize(44100,
+                AudioFormat.CHANNEL_OUT_MONO,
+                AudioFormat.ENCODING_PCM_8BIT);
+
+        AudioTrack mAudioTrack = new AudioTrack(AudioManager.STREAM_MUSIC, 44100,
+                AudioFormat.CHANNEL_OUT_MONO, AudioFormat.ENCODING_PCM_16BIT,
+                mBufferSize, AudioTrack.MODE_STREAM);
+
+        // Sine wave
+        double[] mSound = new double[4410];
+        short[] mBuffer = new short[duration];
+        for (int i = 0; i < mSound.length; i++) {
+            mSound[i] = Math.sin((2.0*Math.PI * i/(44100/frequency)));
+            mBuffer[i] = (short) (mSound[i]*Short.MAX_VALUE);
+        }
+
+        mAudioTrack.setStereoVolume(AudioTrack.getMaxVolume(), AudioTrack.getMaxVolume());
+        mAudioTrack.play();
+
+        mAudioTrack.write(mBuffer, 0, mSound.length);
+        mAudioTrack.stop();
+        mAudioTrack.release();
+
     }
 }

@@ -22,7 +22,7 @@
             android:entries="@array/hard_speed"
             android:entryValues="@array/normal_speed_num_values"
             android:key="hardSpeed"
-            android:summary="Set number minimal number of target dot for win condition." />
+            android:summary="@string/gameSpeedText" />
     </PreferenceCategory>
 
 </PreferenceScreen>
