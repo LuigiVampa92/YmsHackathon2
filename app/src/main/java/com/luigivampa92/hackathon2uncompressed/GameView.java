@@ -27,8 +27,8 @@ public class GameView extends View {
     public boolean mLeftPressed;
     public boolean mRightPressed;
 
-    public TextView mLivesTextView;
-    public TextView mScoreTextView;
+//    public TextView mLivesTextView;
+//    public TextView mScoreTextView;
     public GameLoop mGameLoop;
 
     private static final int LINE_SIZE = 12;
@@ -57,15 +57,15 @@ public class GameView extends View {
         // Initializing Character
         Bitmap mCharacterBmp = BitmapFactory.decodeResource(getResources(), R.drawable.character1);
         mCharacterBmp = Bitmap.createScaledBitmap(mCharacterBmp, chaSize, chaSize, false);
-        mCharacter = new PlayerCharacter(mCharacterBmp, getWidth() / 2 - chaSize / 2, chaSize);
+        mCharacter = new PlayerCharacter(mCharacterBmp, 50,getHeight() - chaSize / 2, chaSize);
 
         // Initializing Obstacles
         mObstacles = new ArrayList<Obstacle>();
         Bitmap mObstacleBmp = BitmapFactory.decodeResource(getResources(), R.drawable.broccoli);
         mObstacleBmp = Bitmap.createScaledBitmap(mObstacleBmp, chaSize/3, chaSize/3, false);
-        mObstacles.add(new Obstacle(mObstacleBmp, getCoordinates(false), false, getHeight(), obsSize, lanes));
-        mObstacles.add(new Obstacle(mObstacleBmp, getCoordinates(false), false, getHeight(), obsSize, lanes));
-        mObstacles.add(new Obstacle(mObstacleBmp, getCoordinates(false), false, getHeight(), obsSize, lanes));
+        mObstacles.add(new Obstacle(mObstacleBmp, getCoordinates(false), false, getWidth(), obsSize, lanes));
+        mObstacles.add(new Obstacle(mObstacleBmp, getCoordinates(false), false, getWidth(), obsSize, lanes));
+        mObstacles.add(new Obstacle(mObstacleBmp, getCoordinates(false), false, getWidth(), obsSize, lanes));
 
         // Initializing Donuts
         Bitmap mDonutBmp = BitmapFactory.decodeResource(getResources(), R.drawable.donut1);
@@ -94,7 +94,7 @@ public class GameView extends View {
                 obs.setCollided(true);
                 if (!obs.isDonut()) {
                     mLives--;
-                    mLivesTextView.setText(String.valueOf("Lives:" + mLives));
+//                    mLivesTextView.setText(String.valueOf("Lives:" + mLives));
                 }
                 if(obs.isDonut()) {
                     mScore++;
@@ -161,8 +161,8 @@ public class GameView extends View {
     }
 
     private void gameOver() {
-        mGameLoop.gameOver = true;
-        mGameLoop.stop();
+//        mGameLoop.gameOver = true;
+//        mGameLoop.stop();
         // TODO save to high scores list
     }
 
@@ -182,11 +182,11 @@ public class GameView extends View {
         }
 
 
-        mScoreTextView.setText(String.valueOf("Score: " + mScore));
+//        mScoreTextView.setText(String.valueOf("Score: " + mScore));
         if (mFirstDraw) {
             initialize();
-            mLivesTextView.setText(String.valueOf("Lives:" + mLives));
-            mScoreTextView.setText(String.valueOf("Score: " + mScore));
+//            mLivesTextView.setText(String.valueOf("Lives:" + mLives));
+//            mScoreTextView.setText(String.valueOf("Score: " + mScore));
             mFirstDraw = false;
         }
 
@@ -196,7 +196,7 @@ public class GameView extends View {
 //            Log.d(TAG, i+ " obs coord" + obs.getX() + "     " + obs.getY() + "-" + (obs.getY() + obs.getHeight()));
             if (!obs.getCollided() && checkCollisions(obs, mCharacter)) {
                 if (mLives <= 0) {
-                    gameOver();
+//                    gameOver();
                 }
             }
         }
@@ -219,8 +219,8 @@ public class GameView extends View {
         }
 
         // Draw road lines
-        canvas.drawLine(getWidth() / 3, 0, getWidth() / 3, getHeight(), paint);
-        canvas.drawLine(getWidth() / 3 * 2, 0, getWidth() / 3 * 2, getHeight(), paint);
+//        canvas.drawLine(0, getHeight() / 3, getHeight(), getHeight() / 3, paint);
+//        canvas.drawLine(0, getHeight() / 3 * 2, getHeight(), getHeight() / 3 * 2, paint);
 
         // Draw character
         mCharacter.draw(canvas, paint);

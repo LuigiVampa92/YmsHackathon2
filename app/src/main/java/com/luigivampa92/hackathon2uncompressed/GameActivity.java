@@ -30,44 +30,44 @@ public class GameActivity extends Activity implements View.OnClickListener {
         animator = new GameLoop(mGameView, FPS);
         Log.d("GameView", "gv object: " + mGameView);
 
-        mGameView.mLivesTextView = (TextView) findViewById(R.id.livesLabel);
-        mGameView.mScoreTextView = (TextView) findViewById(R.id.scoreLabel);
+//        mGameView.mLivesTextView = (TextView) findViewById(R.id.livesLabel);
+//        mGameView.mScoreTextView = (TextView) findViewById(R.id.scoreLabel);
         mGameView.mGameLoop = animator;
 
-        mPauseButton = (Button) findViewById(R.id.pauseButton);
-        mPauseButton.setOnClickListener(this);
-
-        mLeftButton = (Button) findViewById(R.id.leftButton);
-        mLeftButton.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View view, MotionEvent event) {
-                switch(event.getAction()) {
-                    case MotionEvent.ACTION_DOWN:
-                        mGameView.mLeftPressed = true;
-                        return true;
-                    case MotionEvent.ACTION_UP:
-                        mGameView.mLeftPressed = false;
-                        return true;
-                }
-                return false;
-            }
-        });
-
-        mRightButton = (Button) findViewById(R.id.rightButton);
-        mRightButton.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View view, MotionEvent event) {
-                switch(event.getAction()) {
-                    case MotionEvent.ACTION_DOWN:
-                        mGameView.mRightPressed = true;
-                        return true;
-                    case MotionEvent.ACTION_UP:
-                        mGameView.mRightPressed = false;
-                        return true;
-                }
-                return false;
-            }
-        });
+//        mPauseButton = (Button) findViewById(R.id.pauseButton);
+//        mPauseButton.setOnClickListener(this);
+//
+//        mLeftButton = (Button) findViewById(R.id.leftButton);
+//        mLeftButton.setOnTouchListener(new View.OnTouchListener() {
+//            @Override
+//            public boolean onTouch(View view, MotionEvent event) {
+//                switch(event.getAction()) {
+//                    case MotionEvent.ACTION_DOWN:
+//                        mGameView.mLeftPressed = true;
+//                        return true;
+//                    case MotionEvent.ACTION_UP:
+//                        mGameView.mLeftPressed = false;
+//                        return true;
+//                }
+//                return false;
+//            }
+//        });
+//
+//        mRightButton = (Button) findViewById(R.id.rightButton);
+//        mRightButton.setOnTouchListener(new View.OnTouchListener() {
+//            @Override
+//            public boolean onTouch(View view, MotionEvent event) {
+//                switch(event.getAction()) {
+//                    case MotionEvent.ACTION_DOWN:
+//                        mGameView.mRightPressed = true;
+//                        return true;
+//                    case MotionEvent.ACTION_UP:
+//                        mGameView.mRightPressed = false;
+//                        return true;
+//                }
+//                return false;
+//            }
+//        });
 
 /*        mLeftButton = (Button) findViewById(R.id.leftButton);
         mLeftButton.setOnClickListener(new View.OnClickListener() {
