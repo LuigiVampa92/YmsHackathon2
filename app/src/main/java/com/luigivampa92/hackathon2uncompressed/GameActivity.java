@@ -28,7 +28,7 @@ public class GameActivity extends Activity implements View.OnClickListener {
         mGameView.setBackgroundColor(Color.TRANSPARENT);
         backgroundView = findViewById(R.id.background);
         animator = new GameLoop(mGameView, FPS);
-        backgorundAnimator = new BackgorundLoop(backgroundView, FPS);
+        backgorundAnimator = new BackgorundLoop(backgroundView, 20);
         Log.d("GameView", "gv object: " + mGameView);
 
 //        mGameView.mLivesTextView = (TextView) findViewById(R.id.livesLabel);
