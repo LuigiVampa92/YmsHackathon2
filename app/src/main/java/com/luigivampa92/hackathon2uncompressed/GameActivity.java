@@ -173,12 +173,12 @@ public class GameActivity extends Activity implements View.OnClickListener {
 
     public void loadPreferences() {
         if (lvlName.equals("normalGame")) {
-            Constants.speed = Integer.parseInt(sharedPreferences.getString("normalSpeed", ""));
+            Constants.speed = Integer.parseInt(sharedPreferences.getString("normalSpeed", "5"));
             String s = sharedPreferences.getString("normalColor", "");
             Constants.aircraftColor = getColor(s);
         }
         if (lvlName.equals("hardGame")) {
-            Constants.speed = Integer.parseInt(sharedPreferences.getString("hardSpeed", ""));
+            Constants.speed = Integer.parseInt(sharedPreferences.getString("hardSpeed", "30"));
             String s = sharedPreferences.getString("hardColor", "");
             Constants.aircraftColor = getColor(s);
         }
