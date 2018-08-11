@@ -12,14 +12,14 @@ public class Obstacle {
     private Bitmap obstacle;
     private int x;
     private int y;
-    private int resetX;
+    private int resetY;
     private int size;
 
     private boolean isDonut;
     private boolean collided;
     private ArrayList<Integer> lanes;
 
-    public Obstacle(Bitmap bmp, int[] coordinates, boolean isDonut, int canvasWidth,
+    public Obstacle(Bitmap bmp, int[] coordinates, boolean isDonut, int canvasHeight,
                     int size, ArrayList<Integer> possibleLanes) {
         collided = false;
         obstacle = bmp;
@@ -28,7 +28,7 @@ public class Obstacle {
         this.y = coordinates[1];
 
         this.isDonut = isDonut;
-        this.resetX = canvasWidth;
+        this.resetY = canvasHeight;
         this.size = size;
 
         this.lanes = new ArrayList<Integer>();
@@ -38,14 +38,14 @@ public class Obstacle {
     }
 
     public void update() {
-        if (collided || x <= -getWidth()) {
-            this.x = resetX;
+        if (collided || y <= -getHeight()) {
+            this.y = resetY;
             collided = false;
 
             int rand = (int) (Math.random() * 3);
-            this.y = this.lanes.get(rand);
+            this.x = this.lanes.get(rand);
         }
-        this.x -= 2 * SPEED;
+        this.y -= 2 * SPEED;
     }
 
     public int getX() {

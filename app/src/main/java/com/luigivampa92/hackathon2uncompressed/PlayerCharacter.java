@@ -11,19 +11,18 @@ public class PlayerCharacter {
     private int y;
     private int size;
 
-    public PlayerCharacter(Bitmap bmp, int x, int y, int size) {
+    public PlayerCharacter(Bitmap bmp, int x, int size) {
         character = bmp;
         this.x = x;
-        this.y = y;
         this.size = size;
     }
 
-    public void update(int y) {
-        this.y += y;
+    public void update(int x) {
+        this.x += x;
     }
 
     public void draw(Canvas c, Paint p) {
-        c.drawBitmap(character, x, y, p);
+        c.drawBitmap(character, x, 0, p);
     }
 
     public int getWidth() {

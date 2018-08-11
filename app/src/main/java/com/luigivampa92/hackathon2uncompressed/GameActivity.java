@@ -23,8 +23,6 @@ public class GameActivity extends Activity implements View.OnClickListener {
         super.onCreate(savedInstance);
         setContentView(R.layout.activity_game);
 
-        Log.d("123", "123");
-
         mGameView = (GameView) findViewById(R.id.gameView);
         mGameView.setBackgroundColor(Color.GRAY);
         animator = new GameLoop(mGameView, FPS);
