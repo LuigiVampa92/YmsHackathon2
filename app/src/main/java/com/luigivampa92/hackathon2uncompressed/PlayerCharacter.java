@@ -3,6 +3,7 @@ package com.luigivampa92.hackathon2uncompressed;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Path;
 
 public class PlayerCharacter {
 
@@ -26,7 +27,30 @@ public class PlayerCharacter {
 
     public void draw(Canvas c) {
 //        c.drawBitmap(character, x, c.getHeight() - size, p);
-        c.drawOval(x, y - size / 2, x + size, y + size /2, paint);
+//        c.drawOval(x, y - size / 2, x + size, y + size /2, paint);
+
+
+        Path path = new Path();
+        path.moveTo(x + size / 2, y);
+        path.lineTo(x + size, y);
+        path.lineTo(x + size / 2, y + size);
+        path.lineTo(x, y);
+        path.lineTo(x, y);
+        c.drawPath(path, paint);
+
+//        int gap = 10;
+//
+//        Path path = new Path();
+//        path.moveTo(x + gap + 5, y + size / 2);
+//
+//        path.rLineTo(size / 2, -5); // tail r
+//        path.rLineTo(-(size / 2), 5); // tail r
+//
+//        path.rLineTo(-(size / 2), -5);
+//        path.rLineTo(size / 2, 5);
+//
+//        c.drawPath(path, paint);
+
     }
 
     public int getWidth() {
