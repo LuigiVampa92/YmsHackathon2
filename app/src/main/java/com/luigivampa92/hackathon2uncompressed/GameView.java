@@ -55,30 +55,30 @@ public class GameView extends View {
         }
 
         // Initializing Character
-        Bitmap mCharacterBmp = BitmapFactory.decodeResource(getResources(), R.drawable.character1);
-        mCharacterBmp = Bitmap.createScaledBitmap(mCharacterBmp, chaSize, chaSize, false);
+//        Bitmap mCharacterBmp = BitmapFactory.decodeResource(getResources(), R.drawable.character1);
+//        mCharacterBmp = Bitmap.createScaledBitmap(mCharacterBmp, chaSize, chaSize, false);
         mCharacter = new PlayerCharacter(getWidth() / 2 - chaSize / 2, chaSize);
 
         // Initializing Obstacles
         mObstacles = new ArrayList<Obstacle>();
-        Bitmap mObstacleBmp = BitmapFactory.decodeResource(getResources(), R.drawable.broccoli);
-        mObstacleBmp = Bitmap.createScaledBitmap(mObstacleBmp, chaSize/3, chaSize/3, false);
-        mObstacles.add(new Obstacle(mObstacleBmp, getCoordinates(false), false, getHeight(), obsSize, lanes));
-        mObstacles.add(new Obstacle(mObstacleBmp, getCoordinates(false), false, getHeight(), obsSize, lanes));
-        mObstacles.add(new Obstacle(mObstacleBmp, getCoordinates(false), false, getHeight(), obsSize, lanes));
+//        Bitmap mObstacleBmp = BitmapFactory.decodeResource(getResources(), R.drawable.broccoli);
+//        mObstacleBmp = Bitmap.createScaledBitmap(mObstacleBmp, chaSize/3, chaSize/3, false);
+        mObstacles.add(new Obstacle(getCoordinates(false), false, getHeight(), obsSize, lanes));
+        mObstacles.add(new Obstacle(getCoordinates(false), false, getHeight(), obsSize, lanes));
+        mObstacles.add(new Obstacle(getCoordinates(false), false, getHeight(), obsSize, lanes));
 
         // Initializing Donuts
-        Bitmap mDonutBmp = BitmapFactory.decodeResource(getResources(), R.drawable.donut1);
-        mDonutBmp = Bitmap.createScaledBitmap(mDonutBmp, obsSize, obsSize, false);
-        mObstacles.add(new Obstacle(mDonutBmp, getCoordinates(true), true, getHeight(), obsSize, lanes));
+//        Bitmap mDonutBmp = BitmapFactory.decodeResource(getResources(), R.drawable.donut1);
+//        mDonutBmp = Bitmap.createScaledBitmap(mDonutBmp, obsSize, obsSize, false);
+        mObstacles.add(new Obstacle(getCoordinates(true), true, getHeight(), obsSize, lanes));
 
-        Bitmap mDonutBmp2 = BitmapFactory.decodeResource(getResources(), R.drawable.donut9);
-        mDonutBmp2 = Bitmap.createScaledBitmap(mDonutBmp2, obsSize, obsSize, false);
-        mObstacles.add(new Obstacle(mDonutBmp2, getCoordinates(true), true, getHeight(), obsSize, lanes));
+//        Bitmap mDonutBmp2 = BitmapFactory.decodeResource(getResources(), R.drawable.donut9);
+//        mDonutBmp2 = Bitmap.createScaledBitmap(mDonutBmp2, obsSize, obsSize, false);
+        mObstacles.add(new Obstacle(getCoordinates(true), true, getHeight(), obsSize, lanes));
 
-        Bitmap mDonutBmp3 = BitmapFactory.decodeResource(getResources(), R.drawable.donut8);
-        mDonutBmp3 = Bitmap.createScaledBitmap(mDonutBmp3, obsSize, obsSize, false);
-        mObstacles.add(new Obstacle(mDonutBmp3, getCoordinates(true), true, getHeight(), obsSize, lanes));
+//        Bitmap mDonutBmp3 = BitmapFactory.decodeResource(getResources(), R.drawable.donut8);
+//        mDonutBmp3 = Bitmap.createScaledBitmap(mDonutBmp3, obsSize, obsSize, false);
+        mObstacles.add(new Obstacle(getCoordinates(true), true, getHeight(), obsSize, lanes));
     }
 
     // Check collisions between Character and Obstacles
@@ -211,7 +211,7 @@ public class GameView extends View {
 
         // Set paint object attributes
         Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
-        paint.setColor(Color.YELLOW);
+        paint.setColor(Color.GREEN);
         paint.setStrokeWidth(LINE_SIZE);
 
         // Draw the obstacles and donuts

@@ -20,7 +20,7 @@ public class Obstacle {
     private boolean collided;
     private ArrayList<Integer> lanes;
 
-    public Obstacle(Bitmap bmp, int[] coordinates, boolean isDonut, int canvasHeight,
+    public Obstacle(int[] coordinates, boolean isDonut, int canvasHeight,
                     int size, ArrayList<Integer> possibleLanes) {
         collided = false;
 //        obstacle = bmp;
