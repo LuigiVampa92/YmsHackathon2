@@ -57,7 +57,6 @@ public class GameActivity extends Activity implements View.OnClickListener {
         backgroundView = findViewById(R.id.background);
         animator = new GameLoop(mGameView, FPS);
         backgorundAnimator = new BackgorundLoop(backgroundView, FPS);
-        Log.d("GameView", "gv object: " + mGameView);
 
 //        mGameView.mLivesTextView = (TextView) findViewById(R.id.livesLabel);
 //        mGameView.mScoreTextView = (TextView) findViewById(R.id.scoreLabel);
@@ -176,11 +175,28 @@ public class GameActivity extends Activity implements View.OnClickListener {
     public void loadPreferences() {
         if (lvlName.equals("normalGame")) {
             Constants.speed = Integer.parseInt(sharedPreferences.getString("normalSpeed", ""));
+            String s = sharedPreferences.getString("normalColor", "");
+            Constants.aircraftColor = getColor(s);
         }
         if (lvlName.equals("hardGame")) {
             Constants.speed = Integer.parseInt(sharedPreferences.getString("hardSpeed", ""));
+            String s = sharedPreferences.getString("hardColor", "");
+            Constants.aircraftColor = getColor(s);
         }
     }
 
+    private int getColor(String s) {
+        switch(s) {
+            case "red":
+                return Color.argb(128, 200, 50, 100);
+            case "blue":
+                return Color.argb(128, 50, 100, 200);
+            case "orange":
+                return Color.argb(128, 200, 100, 50);
+            case "green":
+                return Color.argb(128, 50, 200, 100);
+        }
+        return Color.argb(128, 200, 50, 100);
+    }
 }
 

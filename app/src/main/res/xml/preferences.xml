@@ -11,18 +11,34 @@
             android:key="normalSpeed"
             android:summary="@string/gameSpeedText" />
 
+        <com.luigivampa92.hackathon2uncompressed.ListPreferenceWithValue
+            android:defaultValue="red"
+            android:title="aircraftColor"
+            android:entries="@array/normal_color"
+            android:entryValues="@array/normal_color_num_values"
+            android:key="normalColor"
+            android:summary="Set color"/>
+
     </PreferenceCategory>
 
     <PreferenceCategory android:title="Hard Game">
 
 
         <com.luigivampa92.hackathon2uncompressed.ListPreferenceWithValue
-            android:defaultValue="8"
+            android:defaultValue="30"
             android:title="Speed"
             android:entries="@array/hard_speed"
-            android:entryValues="@array/hard_speed_num_values"
+            android:entryValues="@array/normal_speed_num_values"
             android:key="hardSpeed"
             android:summary="@string/gameSpeedText" />
+
+        <com.luigivampa92.hackathon2uncompressed.ListPreferenceWithValue
+            android:defaultValue="red"
+            android:title="aircraftColor"
+            android:entries="@array/hard_color"
+            android:entryValues="@array/hard_color_num_values"
+            android:key="hardColor"
+            android:summary="Set color" />
     </PreferenceCategory>
 
 </PreferenceScreen>

@@ -13,4 +13,5 @@ public class Constants {
     };
 
     public static int speed = 5;
+    public static int aircraftColor = Color.argb(100, 200, 50, 100);
 }
