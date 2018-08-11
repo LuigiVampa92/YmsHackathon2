@@ -8,7 +8,6 @@ import android.graphics.Paint;
 import java.util.ArrayList;
 
 public class Obstacle {
-    private static final int SPEED = 5;
 
 //    private Bitmap obstacle;
     private int x;
@@ -46,7 +45,7 @@ public class Obstacle {
             int rand = (int) (Math.random() * 3);
             this.x = this.lanes.get(rand);
         }
-        this.y -= 2 * SPEED; // todo
+        this.y -= 2 * Constants.speed; // todo
     }
 
     public int getX() {

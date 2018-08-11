@@ -20,7 +20,7 @@
             android:defaultValue="8"
             android:title="Speed"
             android:entries="@array/hard_speed"
-            android:entryValues="@array/normal_speed_num_values"
+            android:entryValues="@array/hard_speed_num_values"
             android:key="hardSpeed"
             android:summary="@string/gameSpeedText" />
     </PreferenceCategory>

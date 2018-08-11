@@ -1,8 +1,10 @@
 package com.luigivampa92.hackathon2uncompressed;
 
 import android.app.Activity;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
@@ -10,6 +12,9 @@ import android.widget.Button;
 
 public class GameActivity extends Activity implements View.OnClickListener {
 
+    public static final String LVL = "lvl";
+    String lvlName = null;
+    SharedPreferences sharedPreferences;
     private GameView mGameView;
     private TerrainView backgroundView;
     private boolean mPaused;
@@ -45,7 +50,8 @@ public class GameActivity extends Activity implements View.OnClickListener {
     protected void onCreate(Bundle savedInstance) {
         super.onCreate(savedInstance);
         setContentView(R.layout.activity_game);
-
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        lvlName = getIntent().getStringExtra(GameActivity.LVL);
         mGameView = (GameView) findViewById(R.id.gameView);
         mGameView.setBackgroundColor(Color.TRANSPARENT);
         backgroundView = findViewById(R.id.background);
@@ -120,6 +126,7 @@ public class GameActivity extends Activity implements View.OnClickListener {
 
     public void onResume() {
         super.onResume();
+        loadPreferences();
         if (!animator.isRunning()) {
             animator.start();
         }
@@ -165,5 +172,15 @@ public class GameActivity extends Activity implements View.OnClickListener {
             backgorundAnimator.stop();
         }
     }
+
+    public void loadPreferences() {
+        if (lvlName.equals("normalGame")) {
+            Constants.speed = Integer.parseInt(sharedPreferences.getString("normalSpeed", ""));
+        }
+        if (lvlName.equals("hardGame")) {
+            Constants.speed = Integer.parseInt(sharedPreferences.getString("hardSpeed", ""));
+        }
+    }
+
 }
 
